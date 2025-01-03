@@ -1,0 +1,135 @@
+
+/*****************************Font*****************************/
+
+.walter-turncoat-regular {
+  font-family: "Walter Turncoat", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.do-hyeon-regular {
+  font-family: "Do Hyeon", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+h1{
+    margin: 0; 
+    font-family: "Walter Turncoat", serif;
+    font-size: 100px;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center; /* Center the text within the container */
+}
+
+h2{
+    margin: 0; /* No extra margin */
+    font-family: "Walter Turncoat", serif;
+    font-size: 50px;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center; /* Center the text within the container */
+}
+
+h3{
+  margin: 0; /* No extra margin */
+  font-family: "Walter Turncoat", serif;
+  font-size: 30px;
+  color: #404040;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center; /* Center the text within the container */
+}
+
+h4{
+  font-family: "Walter Turncoat", serif;
+  font-size: 35px;
+  color: #404040;
+  font-weight: 400;
+  font-style: normal;
+  text-align: left; /* Center the text within the container */
+
+}
+
+
+/*****************************Button*****************************/
+/* General button style */
+
+.button-container {
+  display: flex;            /* Enable flex for the buttons */
+  flex-direction: row;      /* Align buttons in a row */
+  justify-content: center;  /* Ensure buttons stay centered */
+  align-items: center;      /* Vertically align buttons */
+  gap: 20px; 
+}
+
+.btn {
+  padding: 50px 80px;
+  font-family: "Walter Turncoat", serif;
+  font-size: 40px;
+  color: white;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn:hover {
+  background-color: #bfbfbf;
+  color: black;
+}
+
+/* Specific style for buttons */
+.btn-login-student {
+  margin: 50px;
+  background-color: #404040 ; 
+}
+
+/* Specific style for Page B button */
+.btn-login-teacher {
+  margin: 50px;
+  background-color: #000000;
+}
+
+
+/*****************************Images*****************************/
+
+/* Center the container (optional if aligning full page) */
+.image-container {
+  display: flex;
+  justify-content: center;  /* Horizontally center */
+}
+
+/* Center the image and control its size */
+.centered-image {
+  max-width: 100%;         /* Prevent the image from exceeding its container width */
+  max-height: 400px;       /* Limit the maximum height */
+  width: auto;             /* Maintain aspect ratio */
+  height: auto;            /* Maintain aspect ratio */
+}
+
+
+/*****************************Text link container*****************************/
+
+.text-link {
+  color: #404040;             /* Default link color */
+  text-decoration: none;      /* Remove underline */
+  font-weight: bold;          /* Optional: Make the text bold */
+  cursor: pointer;            /* Pointer cursor on hover */
+}
+
+.text-link:hover {
+  color: #0056b3;             /* Darker blue on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Optional: Center the text container */
+.text-link-container {
+  text-align: center;
+  margin-top: 20px;
+  font-family: "Walter Turncoat", serif;
+  font-size: 30px;
+}
