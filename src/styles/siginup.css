@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+
+.walter-turncoat-regular {
+    font-family: "Walter Turncoat", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.do-hyeon-regular {
+  font-family: "Do Hyeon", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1{
+  margin: 0; 
+  font-family: "Walter Turncoat", serif;
+  font-size: 100px;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center; /* Center the text within the container */
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #707070;
+    font-family: "Walter Turncoat", serif;
+  }
+  
+  /*****************************Sign-up****************************/
+  /***Register Form***/
+  
+  
+  .container {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container header {
+    font-size: 60px;
+    color: #000;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  /*****************************Form*****************************/
+  form#registerForm {
+    margin-top: 30px;
+  }
+  
+  .form .input-box {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .input-box label {
+    color: #333;
+    font-size: 1.1rem;
+  }
+  
+  .input-box input {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-family: "Do Hyeon", serif;
+    font-size: rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+  }
+  
+  .input-box input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .form button {
+    height: 55px;
+    width: 100%;
+    color: #fff;
+    font-family: "Walter Turncoat", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #000;
+  }
+  
+  .form button:hover {
+    color: #000;
+    font-weight: 400;
+    background:#707070;
+  }
+
+  .text-link {
+    color: #404040;             /* Default link color */
+    text-decoration: none;      /* Remove underline */
+    font-weight: bold;          /* Optional: Make the text bold */
+    cursor: pointer;            /* Pointer cursor on hover */
+  }
+  
+  .text-link:hover {
+    color: #0056b3;             /* Darker blue on hover */
+    text-decoration: underline; /* Add underline on hover */
+  }
+  
+  /* Optional: Center the text container */
+  .text-link-container {
+    text-align: center;
+    margin-top: 20px;
+    font-family: "Walter Turncoat", serif;
+    font-size: 20px;
+  }
+
+  .message {
+    text-align: center;
+    margin-top: 20px;
+    font-family: "Walter Turncoat", serif;
+    font-size: 20px;
+  }

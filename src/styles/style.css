@@ -14,7 +14,6 @@
   font-style: normal;
 }
 
-
 h1{
     margin: 0; 
     font-family: "Walter Turncoat", serif;
@@ -51,6 +50,12 @@ h4{
   font-style: normal;
   text-align: left; /* Center the text within the container */
 
+}
+
+/**Register form을 위해서 모든 요소에 기본적으로 wqlter Turncoat를 사용 */
+*{
+  font-family: "Walter Turncoat", serif;
+  box-sizing: border-box;
 }
 
 
@@ -133,3 +138,4 @@ h4{
   font-family: "Walter Turncoat", serif;
   font-size: 30px;
 }
+
