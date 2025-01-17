@@ -1,0 +1,269 @@
+.walter-turncoat-regular {
+    font-family: "Walter Turncoat", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  
+  .do-hyeon-regular {
+    font-family: "Do Hyeon", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  h1{
+    font-family: "Walter Turncoat", serif;
+    font-size: 60px;
+  }
+
+  h2{
+    font-family: "Walter Turncoat", serif;
+    font-size: 40px;
+  }
+
+  h3{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-family: "Walter Turncoat", serif;
+    font-size: 40px;
+    text-decoration: underline;
+  }
+
+
+  body {
+    font-family: "Walter Turncoat", serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffff;
+}
+
+#dashboard{
+    margin-top: -20px;
+    margin-left: 30px;
+    font-size: 29px;
+}
+
+#profile{
+    margin-top: 0px;
+    margin-right: 20px;
+    margin-left: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 4px gba(0,0,0,0.2);
+}
+
+.schedule-container {
+    position: absolute; /* Position the container absolutely */
+    top: 50%; /* Vertically center */
+    right: 30px; /* Push it from the rightmost edge */
+    transform: translateY(-50%); /* Correct vertical centering */
+}
+
+#checkScheduleButton {
+    width: 250px;
+    height: 150px;
+    background-color: #000000; /* background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Button size */
+    font-family: "Walter Turncoat", serif;
+    font-size: 30px; /* Text size */
+    cursor: pointer; /* Pointer cursor for click */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+#checkScheduleButton:hover {
+    background-color: #6f6f6f; /* Darker green on hover */
+    color: white;
+}
+
+
+/* Floating '+' Button */
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #0000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.floating-button img {
+    width: 60px;
+    height: 60px;
+}
+
+/*Add Students*/
+
+/* Modal Styles */
+.modal {
+    font-family: "Walter Turncoat", serif;
+    font-size: 28px;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    font-family: "Walter Turncoat", serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px; /* Adjust the width of the modal */
+    margin-top: 5px;
+    text-align: center;
+}
+
+.close-button {
+    font-family: "Walter Turncoat", serif;
+    margin-top: 5px;
+    float: right;
+    font-weight: bold;
+    height: 30px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    font-family: "Walter Turncoat", serif;
+    color: #000;
+    text-decoration: none;
+}
+
+/* Input and Button in Row */
+.input-container {
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space between input and button */
+    gap: 10px; /* Add spacing between elements */
+}
+
+input[type="number"] {
+    font-family: "Walter Turncoat", serif;
+    font-size: 16px;
+    flex: 1; /* Allow input field to grow and take up available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    font-family: "Walter Turncoat", serif;
+    background-color: #6f6f6f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    font-family: "Walter Turncoat", serif;
+    margin-top: 10px;
+    font-size: 14px;
+    color: red;
+}
+
+
+/*******Students Listing *******/
+
+#studentListContainer {
+    margin: 20px;
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.student-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #e6f7ff; /* Default light blue */
+}
+
+.student-card:hover {
+    background-color: #bbbcbc; /* Slightly darker blue on hover */
+    transform: scale(1.02); /* Slight zoom effect */
+}
+
+.student-card .color-code {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.student-card .details {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.student-card .details p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.student-card .user-id {
+    font-size: 12px;
+    color: #666;
+}
+
+
+/* Delete Button Styling */
+.delete-button {
+    background-color: transparent; /* No background by default */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor */
+    padding: 5px; /* Adjust padding around the icon */
+    margin-left: 10px; /* Add some space */
+    transition: transform 0.2s ease; /* Smooth hover effect */
+}
+
+/* Hover Effect for Delete Button */
+.delete-button:hover {
+    background-color: #ffcccc; /* Light red background on hover */
+    border-radius: 5px; /* Add slight rounding for the hover effect */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+
+

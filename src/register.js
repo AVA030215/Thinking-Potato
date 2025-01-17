@@ -5,7 +5,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     const email = document.getElementById("email").value;
 
     // 이메일 중복 확인
-    const emailCheckResponse = await fetch(`http://localhost:8080/api/users/check-email?email=${email}`);
+    const emailCheckResponse = await fetch(`http://localhost:8081/api/users/check-email?email=${email}`);
     const emailExists = await emailCheckResponse.json();
 
     if (emailExists) {
@@ -24,7 +24,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     try {
         // API 호출
-        const response = await fetch("http://localhost:8080/api/users/register", {
+        const response = await fetch("http://localhost:8081/api/users/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
