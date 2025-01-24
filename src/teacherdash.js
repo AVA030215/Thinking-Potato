@@ -19,19 +19,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
+
 function renderStudentList(students, teacherEmail) {
     const studentListContainer = document.getElementById("students");
     studentListContainer.innerHTML = ""; // Clear previous list
 
-    students.forEach((student, index) => {
+    students.forEach((student) => {
         const studentCard = document.createElement("div");
         studentCard.className = "student-card";
-        studentCard.dataset.studentEmail = student.email; // Store student email as a data attribute
+        studentCard.dataset.studentEmail = student.email;
 
-        // Assign a unique color code based on the index
+        // ✅ Use color from backend
         const colorCode = document.createElement("div");
         colorCode.className = "color-code";
-        colorCode.style.backgroundColor = getColorCode(index);
+        colorCode.style.backgroundColor = student.colorCode;
 
         const details = document.createElement("div");
         details.className = "details";
@@ -42,37 +43,32 @@ function renderStudentList(students, teacherEmail) {
 
         const userId = document.createElement("div");
         userId.className = "user-id";
-        userId.textContent = `UserID: ${student.id}`;
+        userId.textContent = `UserID: ${student.id ? student.id : "Not Found"}`;  // ✅ Fix UserID
 
-        // Create Delete Button
         const deleteButton = document.createElement("button");
         deleteButton.className = "delete-button";
         deleteButton.innerHTML = `<img src="/public/img/deleteicon.png" alt="Delete" width="20">`;
         deleteButton.onclick = (event) => {
-            event.stopPropagation(); // Prevents accidental navigation
+            event.stopPropagation();
             confirmDelete(teacherEmail, student.email, studentCard);
         };
 
         // **Navigate to teacherhwcheck.html when clicking a student card**
         studentCard.addEventListener("click", function () {
-            window.location.href = `teacherschedule.html?studentEmail=${student.email}`;
+            window.location.href = `teacherhw.html?studentEmail=${student.email}`;
         });
 
-        // Append elements to student card
         studentCard.appendChild(colorCode);
         studentCard.appendChild(details);
         studentCard.appendChild(userId);
         studentCard.appendChild(deleteButton);
 
-        // Append student card to list container
         studentListContainer.appendChild(studentCard);
     });
 }
 
-function getColorCode(index) {
-    const colors = ["#ff6666", "#66b3ff", "#99ff99", "#ffcc99", "#c299ff"];
-    return colors[index % colors.length];
-}
+
+
 
 // Confirm before deleting a student
 function confirmDelete(teacherEmail, studentEmail, studentCard) {
@@ -102,6 +98,7 @@ async function deleteStudent(teacherEmail, studentEmail, studentCard) {
         alert(`Error: ${error.message}`);
     }
 }
+
 
 // Resize Profile Photo
 function setProfilePhotoSize(width, height) {
@@ -148,24 +145,27 @@ addStudentForm.addEventListener("submit", async (event) => {
     try {
         const response = await fetch("http://localhost:8081/api/users/teacher/add-student", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ teacherEmail, studentEmail })
         });
 
         if (response.ok) {
             alert("Student added successfully!");
             addStudentForm.reset();
-            location.reload(); // Refresh the list
+            location.reload();
         } else {
             const error = await response.text();
-            alert(`Error: ${error}`);
+            if (error.includes("already assigned")) {
+                alert("This student is already assigned to you!");
+            } else {
+                alert(`Error: ${error}`);
+            }
         }
     } catch (error) {
         alert(`Error: ${error.message}`);
     }
 });
+
 
 // Close Modal when Clicking Outside
 window.addEventListener("click", (event) => {
