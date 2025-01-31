@@ -1,54 +1,51 @@
+/* =========================
+    General Styles
+=========================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Walter Turncoat", sans-serif;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Fonts */
 .walter-turncoat-regular {
     font-family: "Walter Turncoat", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  
-  .do-hyeon-regular {
-    font-family: "Do Hyeon", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+}
 
-  h2{
+.do-hyeon-regular {
+    font-family: "Do Hyeon", serif;
+}
+
+h2 {
     font-family: "Walter Turncoat", serif;
     font-size: 35px;
     font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 20px;
-  }
-
-  body {
-    font-family: "Walter Turncoat", sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f9f9f9;
+    margin: 15px 0 20px;
 }
 
-/* Container to keep title and profile photo in the same row */
+/* =========================
+    Header & Profile Section
+=========================== */
 .header-container {
     display: flex;
-    justify-content: space-between; /* Pushes title left & profile right */
+    justify-content: space-between; /* Title on left, Profile on right */
     align-items: center;
     width: 100%;
     padding: 10px 20px;
 }
 
-/* "Check My Schedule" Title */
 #scheduleTitle {
     font-size: 60px;
     font-weight: bold;
-    margin: 0;
 }
 
-/* Profile section stays on the right */
 #profile {
     display: flex;
     align-items: center;
@@ -65,20 +62,22 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* "Type: List" dropdown should be below the header but on the right */
+/* =========================
+    View Type Dropdown
+=========================== */
 .view-options {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 10px; /* Adds spacing below title */
+    margin-top: 10px;
 }
 
 #viewType {
     font-family: "Do Hyeon", serif;
-    font-size: 25px;  /* Adjusts text size inside dropdown */
-    width: 150px;  /* Adjusts width */
-    height: 40px;  /* Adjusts height */
-    padding: 5px 10px;  /* Adjusts inner spacing */
+    font-size: 25px;
+    width: 150px;
+    height: 40px;
+    padding: 5px 10px;
     border: 2px solid #ccc;
     border-radius: 5px;
     background-color: white;
@@ -87,49 +86,31 @@
     margin-top: 1%;
 }
 
-
-/* Move schedule box below everything */
+/* =========================
+    Schedule Container
+=========================== */
 #scheduleContainer {
-    max-width: 600px;
-    margin: 20px auto; /* Centers horizontally */
+    width: 90%;
+    max-width: 1200px; /* Wider container */
+    min-width: 800px;
+    height: auto;
+    margin: 20px 0;
     padding: 20px;
-    background-color: #d3d3d3;
+    background-color: #dcdcdc;
     border-radius: 10px;
+    overflow-x: auto;
 }
 
-
-
-/* Floating 'Add' Button */
+/* =========================
+   Floating Add Button
+=========================== */
 .floating-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: #0000;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-.floating-button img {
-    width: 60px;
-    height: 60px;
-}
-
-
-
-/* Modal Styling */
-/* Floating 'Add' Button */
-.floating-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -143,12 +124,11 @@
     height: 60px;
 }
 
-
-/*********Modal*********/
-
-/* Modal Styles */
+/* =========================
+    Modal Styling
+=========================== */
 .modal {
-        font-family: "Do Hyeon", serif;
+    font-family: "Do Hyeon", serif;
     font-size: 20px;
     display: none;
     position: fixed;
@@ -171,8 +151,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 400px; /* Adjust the width of the modal */
-    margin-top: 5px;
+    width: 400px;
     text-align: center;
 }
 
@@ -180,29 +159,27 @@
     float: right;
     font-size: 40px;
     font-weight: bold;
-    height: 30px;
     cursor: pointer;
 }
 
-.close-button:hover,
-.close-button:focus {
+.close-button:hover {
     color: #FF0000;
-    text-decoration: none;
 }
 
-label{
-    display: block; /* Ensures label is above the input */
-    margin: 10px 0 5px 0;
+/* =========================
+   Inputs & Buttons
+=========================== */
+label {
+    display: block;
+    margin: 10px 0 5px;
     text-align: left;
-
 }
 
-/* 🔹 Separate Styling for Inputs */
 input, select, button {
     font-family: "Do Hyeon", serif;
     width: 100%;
     padding: 10px;
-    margin: 5px 0 15px 0;
+    margin: 5px 0 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -210,23 +187,12 @@ input, select, button {
 
 input[type="date"], input[type="time"] {
     background-color: #f9f9f9;
-    padding: 1px soild #ccc;
 }
 
-select{
+select {
     background-color: #fff;
     text-align: center;
-    margin-top: 5px;
 }
-
-/* 🔹 Highlight Selected Inputs */
-input:focus, select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-
 
 button {
     font-family: "Walter Turncoat", serif;
@@ -237,42 +203,19 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 20px;
-    margin-top: 5px;
 }
 
 button:hover {
     background-color: #6f6f6f;
 }
 
-.message {
-    font-family: "Walter Turncoat", serif;
-    margin-top: 10px;
-    font-size: 14px;
-    color: red;
-}
-
-
-
-
-/**********Schedule**********/
-#scheduleContainer {
-    width: 80%; /* Adjust container width dynamically */
-    max-width: 700px; /* Prevents it from being too wide */
-    min-width: 400px; /* Prevents it from shrinking too much */
-    height: auto; /* Adjusts dynamically based on content */
-    max-height: 600px; /* Adds a height limit */
-    margin: 20px 15px; /* Centers horizontally */
-    padding: 20px; /* Adds internal spacing */
-    background-color: #d3d3d3; /* Light gray background */
-    border-radius: 10px; /* Rounded corners */
-    overflow-y: auto; /* Enables scrolling if content overflows */
-}
-
-
+/* =========================
+    List View Styling
+=========================== */
 .date-section {
     font-weight: bold;
-    font-size: 1.2rem;
-    margin-top: 15px;
+    font-size: 23px;
+    margin-top: 25px;
 }
 
 .schedule-box {
@@ -293,42 +236,62 @@ button:hover {
     margin: 5px 0;
 }
 
+/* =========================
+ Weekly View Grid
+=========================== */
+.weekly-view {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.weekly-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.day-column {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 200px;
+}
+
+.day-column h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   Individual Schedule Boxes
+=========================== */
+.schedule-box {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+    text-align: left;
+    font-size: 20px;
+}
+
 .button-container {
     display: flex;
-    justify-content: space-between;
-    width: 80px; /* ✅ Ensures the container is wide enough */
+    justify-content: flex-end;
+    padding-right: 10px;
 }
 
 .button-container img {
-    width: 25px; /* ✅ Slightly larger for visibility */
+    width: 25px;
     height: 25px;
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
 
 .button-container img:hover {
-    opacity: 0.7; /* ✅ Visual feedback on hover */
+    opacity: 0.7;
 }
-
-
-
-.floating-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.floating-button img {
-    width: 60px;
-    height: 60px;
-}
-
-
-
