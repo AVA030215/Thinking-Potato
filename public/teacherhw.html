@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thinking Potato : Manage Homework </title>
+        <link rel="icon" href="/public/img/logo.png" type="image/png">
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Walter+Turncoat&display=swap" rel="stylesheet">
+        <!--CSS-->
+        <link rel="stylesheet" href="/src/styles/teacherhw.css">
+        <!-- jQuery -->
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         <!-- js -->
+          <script src="../src/navigation.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    </head>
 <body>
+    <!-- New Container for Title & Profile -->
+    <div class="header-container">
+        <h1 id="scheduleTitle">Check Homework</h1>
+        <div id="profile">
+            <img src="/public/img/exampleprofile.jpg" alt="User Profile" id="profile-photo"/>
+        </div>
+    </div>
+
     
+    <!-- Homework Completion Donut Chart -->
+    <div class="donut-chart-container">
+        <canvas id="homeworkChart"></canvas>
+        <div class="percentage-label" id="completionPercentage">0%</div>
+    </div>
+
+    <!-- Homework List Container -->
+    <div id="homework-list"></div>
+
+    <!-- Homework Input Field -->
+    <input type="text" id="homework-input" placeholder="Type new homework">
+
+
+
+    <!-- Floating Add Homework Button -->
+    <div class="floating-button" onclick="addHomework()">
+        <img src="/public/img/pluswhiteicon.png" alt="Add Homework">
+    </div>
+
+    <button id="reset-homework" class="reset-button">Reset</button>
+
+    <script src="/src/teacherhw.js"></script>    
 </body>
 </html>
