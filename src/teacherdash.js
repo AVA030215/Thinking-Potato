@@ -7,6 +7,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     try {
+        // Fetch teacher details for greeting
+        const teacherDetailsResponse = await fetch(`http://localhost:8081/api/users/details/${teacherEmail}`);
+        if (teacherDetailsResponse.ok) {
+            const teacherData = await teacherDetailsResponse.json();
+            displayUserGreeting(teacherData);
+        } else {
+            console.error("Failed to fetch teacher details:", await teacherDetailsResponse.text());
+        }
+
+        // Fetch students
         const response = await fetch(`http://localhost:8081/api/users/teacher/email/${teacherEmail}/students`);
         if (response.ok) {
             const students = await response.json();
@@ -15,9 +25,18 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.error("Failed to fetch students:", await response.text());
         }
     } catch (error) {
-        console.error("Error fetching students:", error);
+        console.error("Error fetching data:", error);
     }
 });
+
+function displayUserGreeting(user) {
+    const greetingElement = document.getElementById("greeting");
+    if (greetingElement && user.firstName) {
+        greetingElement.textContent = `Kia Ora, ${user.firstName}`;
+    } else {
+        console.error("Element with ID 'greeting' not found or user firstName missing.");
+    }
+}
 
 
 function renderStudentList(students, teacherEmail) {

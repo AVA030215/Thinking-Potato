@@ -1,0 +1,118 @@
+.walter-turncoat-regular {
+    font-family: "Walter Turncoat", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  
+  .do-hyeon-regular {
+    font-family: "Do Hyeon", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  h1{
+    font-family: "Walter Turncoat", serif;
+    font-size: 60px;
+  }
+
+  h2{
+    font-family: "Walter Turncoat", serif;
+    font-size: 40px;
+  }
+
+  h3{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-family: "Walter Turncoat", serif;
+    font-size: 40px;
+    text-decoration: underline;
+  }
+
+
+  body {
+    font-family: "Walter Turncoat", serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffff;
+}
+
+#dashboard{
+    margin-top: -20px;
+    margin-left: 30px;
+    font-size: 29px;
+}
+
+#profile{
+    margin-top: 0px;
+    margin-right: 20px;
+    margin-left: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 4px gba(0,0,0,0.2);
+}
+
+.schedule-container {
+    position: absolute; /* Position the container absolutely */
+    top: 70%; /* Vertically center */
+    right: 30%;
+    transform: translateY(-50%); /* Correct vertical centering */
+}
+
+#checkScheduleButton {
+    width: 400px;
+    height: 250px;
+    background-color: #4d4d4d; /* background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Button size */
+    font-family: "Walter Turncoat", serif;
+    font-size: 45px; /* Text size */
+    font-weight: bold;
+    cursor: pointer; /* Pointer cursor for click */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+#checkScheduleButton:hover {
+    background-color: #000000; /* Darker green on hover */
+    color: white;
+}
+
+
+.homework-container {
+    position: absolute; /* Position the container absolutely */
+    top: 50%; /* Vertically center */
+    right: 60%; /* Push it from the rightmost edge */
+    transform: translateY(-50%); /* Correct vertical centering */
+}
+
+#checkHomeworkButton {
+    width: 400px;
+    height: 250px;
+    background-color: #b0b0b0; /* background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Button size */
+    font-family: "Walter Turncoat", serif;
+    font-size: 40px; /* Text size */
+    font-weight: bold;
+    cursor: pointer; /* Pointer cursor for click */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+#checkHomeworkButton:hover {
+    background-color: #000000; /* Darker green on hover */
+    color: white;
+}

@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Thinking Potato : Dashboard</title>
+    <link rel="icon" href="/public/img/logo.png" type="image/png">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Walter+Turncoat&display=swap" rel="stylesheet">
+    <!--CSS-->
+    <link rel="stylesheet" href="/src/styles/studentdash.css">
+    <!-- jQuery -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- js -->
+      <script src="../src/navigation.js"></script>
+
 </head>
 <body>
+    <div id="dashboard">
+        <h1 id="greeting">Kia Ora, </h1>
+    </div>
+
+    <div id="profile">
+        <img src="/public/img/exampleprofile.jpg" alt="User Profile" id="profile-photo"/>
+    </div>
+
+    <div class = "homework-container">
+        <button id="checkHomeworkButton">Check My Homework</button>      
+    </div>
+
+    <div class="schedule-container">
+        <button id="checkScheduleButton">Check My Schedule</button>
+    </div>
     
+    
+
+    <script src="/src/studentdash.js"></script>
 </body>
 </html>
