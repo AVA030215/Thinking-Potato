@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thinking Potato : Schedule</title>
+        <link rel="icon" href="/public/img/logo.png" type="image/png">
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Walter+Turncoat&display=swap" rel="stylesheet">
+        <!--CSS-->
+        <link rel="stylesheet" href="/src/styles/teacherschedule.css">
+        <!-- jQuery -->
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+<body>
+
+    <!-- New Container for Title & Profile -->
+<div class="header-container">
+    <h1 id="scheduleTitle">Check My Schedule</h1>
+    <div id="profile">
+        <img src="/public/img/exampleprofile.jpg" alt="User Profile" id="profile-photo"/>
+    </div>
+</div>
+
+<!-- Type selection dropdown below the title -->
+<div class="view-options">
+    <select id="viewType">
+        <option value="list">List</option>
+        <option value="weekly">Weekly</option>
+    </select>
+</div>
+
+<!-- Schedule Display Area -->
+<div id="scheduleContainer"></div>
+
+    <!-- Add Schedule Button -->
+    <div id="addScheduleButton" class="floating-button">
+        <img src="/public/img/plusicon.png" alt="Add Schedule">
+    </div>
+    
+    <!-- Add Schedule Modal -->
+    <div id="addScheduleModal" class="modal" style="display: none;"> <!-- Hide modal initially -->
+        <div class="modal-content">
+            <span class="close-button" id="closeScheduleModal">&times;</span>
+            <h2>Add New Schedule</h2>
+            <form id="addScheduleForm">
+                <!-- Select Student -->
+                <select id="studentSelect" required></select>
+
+                <!-- Start & End Date -->
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" required>
+
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate">
+
+                <!-- Repetition -->
+                 <label for="repetition">Repeat:</label>
+                <select id="repetition">
+                  <option value="1">Every Week</option>
+                 <option value="2">Every 2 Weeks</option>
+                 <option value="3">Every 3 Weeks</option>
+                 <option value="4">Every Month</option>
+                 </select>
+
+                <!-- Lesson Time -->
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" required>
+
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" required>
+
+                <!-- Lesson Type -->
+                <label for="lessonType">Lesson Type:</label>
+                <select id="lessonType">
+                    <option value="online">Online</option>
+                    <option value="in-person">In Person</option>
+                </select>
+
+                <!-- Address (Shown if In-Person) -->
+                <div id="addressSection" style="display: none;">
+                 <label for="address">Address:</label>
+                 <input type="text" id="address">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit">Add Schedule</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <script src="/src/teacherschedule.js"></script>    
+</body>
+</html>

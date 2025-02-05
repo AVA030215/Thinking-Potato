@@ -117,49 +117,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
     }
 
-    document.body.addEventListener("click", async (event) => {
-        if (event.target.classList.contains("delete-btn")) {
-            const scheduleId = event.target.dataset.id;  // Get schedule ID
-            let scheduleDate = event.target.dataset.date; // Get schedule date
-            
-            if (!scheduleId) {
-                console.error("No schedule ID found.");
-                return;
-            }
-    
-            // Prevent sending `undefined` date
-            if (!scheduleDate || scheduleDate === "undefined" || scheduleDate.trim() === "") {
-                console.error("Invalid schedule date. Cannot delete.");
-                alert("Error: Schedule date is missing.");
-                return;
-            }
-    
-            // Confirm deletion
-            const confirmDelete = confirm(`Are you sure you want to delete this schedule on ${scheduleDate}?`);
-            if (!confirmDelete) return;
-    
-            try {
-                const url = new URL(`http://localhost:8081/api/schedules/delete/${scheduleId}`);
-                url.searchParams.append("date", scheduleDate);  // Include date parameter
-    
-                const response = await fetch(url, { method: "DELETE" });
-    
-                const result = await response.text();
-                console.log("Delete response:", result);
-    
-                if (response.ok) {
-                    event.target.closest(".schedule-box").remove();
-                } else {
-                    console.error("Failed to delete:", result);
-                }
-            } catch (error) {
-                console.error("Error deleting schedule:", error);
-            }
-        }
-    });
-    
-
-
     // Fetch and Render Schedule Data
     async function fetchSchedule() {
         try {
@@ -167,7 +124,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (response.ok) {
                 const scheduleData = await response.json();
                 renderSchedule(scheduleData);
-                console.log("Fetched Schedule Data:", scheduleData); // 🔍 Debugging log
             } else {
                 console.error("Failed to fetch schedule:", await response.text());
             }
@@ -179,18 +135,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Render the Schedule Based on Selected View Type
     function renderSchedule(scheduleData) {
         scheduleContainer.innerHTML = ""; // Clear previous content
-    
-        for (const [date, schedules] of Object.entries(scheduleData)) {
-            schedules.forEach(schedule => {
-                schedule.startDate = date; // 🔹 Manually add startDate
-            });
-        }
-    
+
         // Remove any existing view class before applying new one
         scheduleContainer.classList.remove("weekly-view", "list-view");
-    
+
         const viewType = viewTypeSelect.value;
-    
+
         if (viewType === "list") {
             scheduleContainer.classList.add("list-view");
             renderListView(scheduleData);
@@ -199,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             renderWeeklyView(scheduleData);
         }
     }
-    
+
     // Render List View (Ensures all days in the week are shown)
     function renderListView(scheduleData) {
         scheduleContainer.innerHTML = ""; // Clear old content
@@ -293,88 +243,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         const scheduleBox = document.createElement("div");
         scheduleBox.classList.add("schedule-box");
         scheduleBox.style.backgroundColor = schedule.studentColor || "#ccc";
-    
-        // Ensure `startDate` is assigned correctly but hidden
-        const scheduleDate = schedule.startDate ? schedule.startDate : "";
-    
-        console.log("Creating schedule box - ID:", schedule.id, "Date:", scheduleDate); // Debugging log
-    
         scheduleBox.innerHTML = `
             <div class="schedule-info">
                 <p><strong>${schedule.studentName}</strong></p>
                 <p>${formatTime(schedule.startTime)} - ${formatTime(schedule.endTime)}</p>
                 <p>${schedule.lessonType}</p>
                 ${schedule.lessonType.toLowerCase() === "in-person" ? `<p>Address: ${schedule.address}</p>` : ""}
-                <span class="hidden-date" data-date="${scheduleDate}"></span> <!-- 🔹 Hidden element for date -->
-            </div>
-            
-            <div class="button-container">
-                <img src="/public/img/deleteicon.png" alt="Delete" class="delete-btn" 
-                     data-id="${schedule.id}" data-date="${scheduleDate}">
             </div>
         `;
         return scheduleBox;
     }
-    
-    
-    //Delete Schedule
-    
-    async function deleteSchedule(scheduleId, date, deleteFuture, repetition) {
-        try {
-            let url = `http://localhost:8081/api/schedules/delete/${scheduleId}`;
-            let method = "DELETE";
-    
-            if (deleteFuture) {
-                // 🔹 If deleting all occurrences, proceed with full deletion
-                url += `?future=true`;
-            } else {
-                // 🔹 If only deleting a single occurrence, update the start date if repetition exists
-                if (repetition > 1) {
-                    url = `http://localhost:8081/api/schedules/update/${scheduleId}`;
-                    method = "PUT";
-    
-                    // Calculate the new start date based on the repetition interval
-                    const currentDate = new Date(date);
-                    currentDate.setDate(currentDate.getDate() + (repetition * 7)); // Move to the next scheduled week
-    
-                    const updatedSchedule = {
-                        startDate: currentDate.toISOString().split("T")[0] // Convert to YYYY-MM-DD format
-                    };
-    
-                    console.log("Updating Schedule Start Date:", updatedSchedule);
-                } else {
-                    // If it's not repeating, just delete it normally
-                    url += `?date=${date}`;
-                }
-            }
-    
-            const response = await fetch(url, {
-                method: method,
-                headers: { "Content-Type": "application/json" },
-                body: method === "PUT" ? JSON.stringify(updatedSchedule) : null
-            });
-    
-            const result = await response.text();
-            console.log("Delete/Update response:", result);
-    
-            if (response.ok) {
-                if (deleteFuture) {
-                    alert("All future occurrences deleted successfully!");
-                } else if (repetition > 1) {
-                    alert("This occurrence deleted, and future occurrences updated accordingly.");
-                } else {
-                    alert("Single occurrence deleted successfully!");
-                }
-    
-                fetchSchedule(); // Refresh the schedule list
-            } else {
-                console.error("Failed to delete/update:", result);
-            }
-        } catch (error) {
-            console.error("Error deleting/updating schedule:", error);
-        }
-    }
-    
 
     // Format Date
     function formatDate(dateStr) {

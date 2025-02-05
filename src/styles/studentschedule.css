@@ -91,7 +91,7 @@ h2 {
 =========================== */
 #scheduleContainer {
     width: 90%;
-    max-width: 1350px; /* Wider container */
+    max-width: 1200px; /* Wider container */
     min-width: 800px;
     height: auto;
     margin: 20px 0;
@@ -250,7 +250,7 @@ button:hover {
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     width: 100%;
-    max-width: 1300px;
+    max-width: 1200px;
 }
 
 .day-column {
