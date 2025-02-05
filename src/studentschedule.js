@@ -1,134 +1,31 @@
 document.addEventListener("DOMContentLoaded", async function () {
-    const addScheduleButton = document.getElementById("addScheduleButton");
-    const addScheduleModal = document.getElementById("addScheduleModal");
-    const closeScheduleModal = document.getElementById("closeScheduleModal");
-    const lessonTypeSelect = document.getElementById("lessonType");
-    const addressSection = document.getElementById("addressSection");
-    const studentSelect = document.getElementById("studentSelect");
-    const addScheduleForm = document.getElementById("addScheduleForm");
-
-    const teacherEmail = localStorage.getItem("loggedInTeacherEmail");
-
-
-    // Open & Close Modal
-    addScheduleButton.addEventListener("click", () => addScheduleModal.style.display = "block");
-    closeScheduleModal.addEventListener("click", () => addScheduleModal.style.display = "none");
-    window.addEventListener("click", (event) => {
-        if (event.target === addScheduleModal) addScheduleModal.style.display = "none";
-    });
-
-    // Show/Hide Address Field
-    lessonTypeSelect.addEventListener("change", () => {
-        addressSection.style.display = lessonTypeSelect.value === "in-person" ? "block" : "none";
-    });
-
-    // Fetch Students for Dropdown
-    async function fetchStudents() {
-        try {
-            const response = await fetch(`http://localhost:8081/api/users/teacher/email/${teacherEmail}/students`);
-            if (response.ok) {
-                const students = await response.json();
-                students.forEach((student, index) => {
-                    const option = document.createElement("option");
-                    option.value = student.email;
-                    option.textContent = student.firstName + " " + student.lastName;
-                    option.style.color = getColorCode(index);
-                    studentSelect.appendChild(option);
-                });
-            } else {
-                console.error("Failed to fetch students:", await response.text());
-            }
-        } catch (error) {
-            console.error("Error fetching students:", error);
-        }
-    }
-
-
-    // Submit Schedule
-    addScheduleForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const scheduleData = {
-            teacherEmail: teacherEmail,
-            studentEmail: studentSelect.value,
-            startDate: document.getElementById("startDate").value,
-            endDate: document.getElementById("endDate").value || null,
-            repetition: document.getElementById("repetition").value || 1,
-            startTime: document.getElementById("startTime").value,
-            endTime: document.getElementById("endTime").value,
-            lessonType: lessonTypeSelect.value,
-            address: document.getElementById("address").value || null
-        };
-        
-
-        try {
-            const response = await fetch("http://localhost:8081/api/schedules/add", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(scheduleData)
-            });
-
-            if (response.ok) {
-                alert("Schedule added successfully!");
-                addScheduleModal.style.display = "none";
-                location.reload(); // Refresh schedule list
-            } else {
-                alert(`Error: ${await response.text()}`);
-            }
-        } catch (error) {
-            alert(`Error: ${error.message}`);
-        }
-    });
-
-    // Load students on page load
-    fetchStudents();
-});
-
-// Function to get color code
-function getColorCode(index) {
-    const colors = ["#ff6666", "#66b3ff", "#99ff99", "#ffcc99", "#c299ff"];
-    return colors[index % colors.length];
-}
-
-
-// Resize Profile Photo
-function setProfilePhotoSize(width, height) {
-    const profilePhoto = document.getElementById("profile-photo");
-    if (profilePhoto) {
-        profilePhoto.style.width = width + "px";
-        profilePhoto.style.height = height + "px";
-    }
-}
-setProfilePhotoSize(100, 100);
-
-// Profile Photo Click Event (Navigates to My Info Page)
-document.getElementById("profile-photo").addEventListener("click", function () {
-    window.location.href = "../../public/myinfo.html";
-});
-
-
-document.addEventListener("DOMContentLoaded", async function () {
     const scheduleContainer = document.getElementById("scheduleContainer");
     const viewTypeSelect = document.getElementById("viewType");
-    const teacherEmail = localStorage.getItem("loggedInTeacherEmail");
+    const studentEmail = localStorage.getItem("loggedInStudentEmail"); // Get the logged-in student’s email
+
+    if (!studentEmail) {
+        console.error("❌ Student email not found in local storage.");
+        return;
+    }
 
     if (!scheduleContainer) {
-        console.error("Error: scheduleContainer not found in the DOM.");
+        console.error("❌ Error: scheduleContainer not found in the DOM.");
         return;
     }
 
     // Fetch and Render Schedule Data
-    async function fetchSchedule() {
+    async function fetchStudentSchedule() {
         try {
-            const response = await fetch(`http://localhost:8081/api/schedules/weekly/${teacherEmail}`);
+            const response = await fetch(`http://localhost:8081/api/schedules/student/${studentEmail}`);
             if (response.ok) {
                 const scheduleData = await response.json();
                 renderSchedule(scheduleData);
+                console.log("✅ Fetched Schedule Data:", scheduleData);
             } else {
-                console.error("Failed to fetch schedule:", await response.text());
+                console.error("❌ Failed to fetch schedule:", await response.text());
             }
         } catch (error) {
-            console.error("Error fetching schedule:", error);
+            console.error("❌ Error fetching schedule:", error);
         }
     }
 
@@ -136,7 +33,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     function renderSchedule(scheduleData) {
         scheduleContainer.innerHTML = ""; // Clear previous content
 
-        // Remove any existing view class before applying new one
+        for (const [date, schedules] of Object.entries(scheduleData)) {
+            schedules.forEach(schedule => {
+                schedule.startDate = date; // 🔹 Add startDate to the schedule object
+            });
+        }
+
+        // Remove any existing view class before applying the new one
         scheduleContainer.classList.remove("weekly-view", "list-view");
 
         const viewType = viewTypeSelect.value;
@@ -150,9 +53,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // Render List View (Ensures all days in the week are shown)
+    // Render List View
     function renderListView(scheduleData) {
-        scheduleContainer.innerHTML = ""; // Clear old content
+        scheduleContainer.innerHTML = "";
 
         const today = new Date();
         const startOfWeek = new Date(today);
@@ -190,11 +93,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     function renderWeeklyView(scheduleData) {
         scheduleContainer.innerHTML = ""; // Clear previous view
         scheduleContainer.classList.add("weekly-view");
-    
+
         const today = new Date();
         const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 1)); // Monday
         const endOfWeek = new Date(today.setDate(startOfWeek.getDate() + 6)); // Sunday
-    
+
         const fullWeek = [];
         let currentDate = new Date(startOfWeek);
         while (currentDate <= endOfWeek) {
@@ -205,17 +108,17 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
             currentDate.setDate(currentDate.getDate() + 1);
         }
-    
+
         // **Grid Container for Weekly View**
         const gridContainer = document.createElement("div");
         gridContainer.classList.add("weekly-grid");
-    
-        // **Generate Week Columns
+
+        // **Generate Week Columns**
         fullWeek.forEach(dayInfo => {
             const dayColumn = document.createElement("div");
             dayColumn.classList.add("day-column");
             dayColumn.innerHTML = `<h3>${dayInfo.display}<br>${dayInfo.dayName}</h3>`; // Example: "01.27 Monday"
-    
+
             if (scheduleData[dayInfo.date]) {
                 scheduleData[dayInfo.date].forEach(schedule => {
                     const scheduleBox = createScheduleBox(schedule);
@@ -228,21 +131,22 @@ document.addEventListener("DOMContentLoaded", async function () {
                 emptyBox.innerHTML = "<p>No schedule</p>";
                 dayColumn.appendChild(emptyBox);
             }
-    
+
             gridContainer.appendChild(dayColumn);
         });
-    
-        // **Append Only the Grid (No Extra Date List on Left!)**
+
+        // **Append Only the Grid**
         scheduleContainer.appendChild(gridContainer);
     }
-    
-    
 
-    // Create Schedule Box
+    // Create Schedule Box (NO DELETE OR EDIT BUTTON)
     function createScheduleBox(schedule) {
         const scheduleBox = document.createElement("div");
         scheduleBox.classList.add("schedule-box");
         scheduleBox.style.backgroundColor = schedule.studentColor || "#ccc";
+
+        console.log("Creating schedule box - ID:", schedule.id, "Date:", schedule.startDate);
+
         scheduleBox.innerHTML = `
             <div class="schedule-info">
                 <p><strong>${schedule.studentName}</strong></p>
@@ -269,11 +173,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Listen for view type change & re-render
-    viewTypeSelect.addEventListener("change", () => fetchSchedule());
+    viewTypeSelect.addEventListener("change", () => fetchStudentSchedule());
 
     // Fetch and Render Schedule on Load
-    fetchSchedule();
+    fetchStudentSchedule();
 });
+
 
 
 
