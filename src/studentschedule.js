@@ -13,6 +13,24 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
     }
 
+    try {
+        // ✅ Step 1: Fetch student details (including profile photo)
+        const studentDetailsResponse = await fetch(`http://localhost:8081/api/users/details/${studentEmail}`);
+        
+        if (studentDetailsResponse.ok) {
+            const studentData = await studentDetailsResponse.json();
+            updateProfilePhotoFromDB(studentData.profilePhoto); // ✅ Update Profile Photo
+        } else {
+            console.error("❌ Failed to fetch student details:", await studentDetailsResponse.text());
+        }
+
+        // ✅ Step 2: Fetch and render student schedule
+        await fetchStudentSchedule();
+
+    } catch (error) {
+        console.error("❌ Error fetching student details or schedule:", error);
+    }
+
     // Fetch and Render Schedule Data
     async function fetchStudentSchedule() {
         try {
@@ -178,6 +196,31 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Fetch and Render Schedule on Load
     fetchStudentSchedule();
 });
+
+function updateProfilePhotoFromDB(photoUrl) {
+    const profilePhoto = document.getElementById("profile-photo");
+    if (profilePhoto && photoUrl) {
+        profilePhoto.src = photoUrl; // ✅ Set profile photo dynamically from DB
+    } else {
+        console.error("❌ Profile photo element not found or missing photo URL.");
+    }
+}
+
+// Resize Profile Photo
+function setProfilePhotoSize(width, height) {
+    const profilePhoto = document.getElementById("profile-photo");
+    if (profilePhoto) {
+        profilePhoto.style.width = width + "px";
+        profilePhoto.style.height = height + "px";
+    }
+}
+setProfilePhotoSize(100, 100);
+
+// Profile Photo Click Event (Navigates to My Info Page)
+document.getElementById("profile-photo").addEventListener("click", function () {
+    window.location.href = "../../public/myinfo.html";
+});
+
 
 
 

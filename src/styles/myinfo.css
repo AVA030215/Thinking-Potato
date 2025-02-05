@@ -1,0 +1,329 @@
+/* =========================
+    General Styles
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Walter Turncoat", sans-serif;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Fonts */
+.walter-turncoat-regular {
+    font-family: "Walter Turncoat", serif;
+}
+
+.do-hyeon-regular {
+    font-family: "Do Hyeon", serif;
+}
+
+h2 {
+    font-family: "Walter Turncoat", serif;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 15px 0 20px;
+}
+
+h3 {
+    font-family: "Walter Turncoat", serif;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 15px 0 20px;
+    text-align: left;
+}
+
+/*Header Container */
+
+#Title {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.account-container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/***Profile photo***/
+
+/* Profile section styling */
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+/* Profile photo with hover effect */
+.profile-photo-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+}
+
+.profile-photo {
+    width: 100%;
+    border-radius: 50%;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+}
+
+/* Overlay effect */
+.profile-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.profile-overlay span {
+    background-color: rgba(0, 0, 0, 3);
+    color: white;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+/* Hover effect */
+.profile-photo-container:hover .profile-photo {
+    opacity: 0.3;
+}
+
+.profile-photo-container:hover .profile-overlay {
+    opacity: 1;
+}
+
+
+/*************** Tab Button**************/
+
+/* =========================
+    Tabs Styling
+=========================== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.tab-button {
+    color: black;
+    padding: 8px 15px;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.tab-button.active {
+    background: black;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* =========================
+    Input Fields
+=========================== */
+.info-section {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.info-section label {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    margin-bottom: 8px;
+    margin-left: 25%;
+    width:50%;
+}
+
+.info-section input {
+    font-family: "Do hyeon", serif;
+    flex: 1;
+    padding: 8px;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #eee;
+    margin-left: 10px;
+}
+
+/* =========================
+    Buttons
+=========================== */
+button {
+    font-family: "Walter Turncoat", serif;
+    padding: 6px 12px;
+    font-size: 20px;
+    border: none;
+    background: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    margin-left: 2px;
+}
+
+button:hover {
+    background: #333;
+}
+
+
+/* =========================
+    Modal Styling (Fixing Size & Layout)
+=========================== */
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    width: 600px; /* Adjusted modal width */
+    height: auto; /* Dynamic height */
+    margin: 10% auto;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Prevents images from overflowing */
+}
+
+/* Profile Picture Options */
+.photo-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+    gap: 15px; /* Space between images */
+    margin-top: 20px;
+    padding: 10px;
+    justify-items: center; /* Centers images */
+}
+
+/* Uniform Image Sizing */
+.photo-options img {
+    width: 150px; /* Fixed size */
+    height: 150px; /* Fixed size */
+    border-radius: 50%; /* Keeps the images circular */
+    cursor: pointer;
+    object-fit: cover; /* Ensures proper aspect ratio */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect to enlarge image */
+.photo-options img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button positioning */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+/* Modal visibility */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* =========================
+    Security Section Styling
+=========================== */
+.security-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.security-section label {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    margin-bottom: 8px;
+    margin-left: 25%;
+    width: 50%;
+}
+
+.security-section input {
+    flex: 1;
+    padding: 8px;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #eee;
+    margin-left: 10px;
+}
+
+.security-section button {
+    padding: 6px 12px;
+    border: none;
+    background: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.security-section button:hover {
+    background: #333;
+}
+
+/* =========================
+    Error Message Styling
+=========================== */
+.error-message {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 110px; /* Align with input field */
+    margin-top: 5px;
+}

@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (studentDetailsResponse.ok) {
             const studentData = await studentDetailsResponse.json();
             displayUserGreeting(studentData);
+            updateProfilePhotoFromDB(studentData.profilePhoto);
         } else {
             console.error("❌ Failed to fetch student details:", await studentDetailsResponse.text());
         }
@@ -43,6 +44,14 @@ function displayUserGreeting(user) {
     }
 }
 
+function updateProfilePhotoFromDB(photoUrl) {
+    const profilePhoto = document.getElementById("profile-photo");
+    if (profilePhoto && photoUrl) {
+        profilePhoto.src = photoUrl; // ✅ Set profile photo dynamically from DB
+    } else {
+        console.error("❌ Profile photo element not found or missing photo URL.");
+    }
+}
 
 // ✅ Resize Profile Photo
 function setProfilePhotoSize(width, height) {

@@ -21,10 +21,12 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             if (data.email) {
                 if (data.role === "teacher") {
                     localStorage.setItem("loggedInTeacherEmail", data.email);
+                    localStorage.removeItem("loggedInStudentEmail"); // ✅ Ensure student email is cleared
                     console.log("✅ Teacher email stored:", localStorage.getItem("loggedInTeacherEmail"));
                     window.location.href = "../../public/teacherdash.html";
                 } else if (data.role === "student") {
                     localStorage.setItem("loggedInStudentEmail", data.email);
+                    localStorage.removeItem("loggedInTeacherEmail"); // ✅ Ensure teacher email is cleared
                     
                     // 🔄 Ensure email is properly saved
                     setTimeout(() => {
@@ -44,6 +46,8 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         document.getElementById("message").innerText = `Error: ${error.message}`;
     }
 });
+
+
 
 
 

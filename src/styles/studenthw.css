@@ -1,0 +1,227 @@
+/* =========================
+    General Styles
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Walter Turncoat", sans-serif;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Fonts */
+.walter-turncoat-regular {
+    font-family: "Walter Turncoat", serif;
+}
+
+.do-hyeon-regular {
+    font-family: "Do Hyeon", serif;
+}
+
+h2 {
+    font-family: "Walter Turncoat", serif;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 15px 0 20px;
+}
+
+/* =========================
+    Header & Profile Section
+=========================== */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Title on left, Profile on right */
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+#scheduleTitle {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+#profile {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+#profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+/* =========================
+  Homework Container
+=========================== */
+
+#homework-list {
+    width: 90%;
+    max-width: 1000px; /* Wider container */
+    min-width: 800px;
+    height: auto;
+    margin: 70px 0;
+    margin-bottom: 1%;
+    padding: 20px;
+    background-color: #b0b0b0;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+/* Homework Item */
+/* Homework Item */
+.homework-item {
+    font-family: "Do Hyeon", serif;
+    font-weight: 500;
+    font-size: 30px;
+    display: flex;
+    align-items: center; /* ✅ Center vertically */
+    justify-content: center; /* ✅ Center horizontally */
+    text-align: center; /* ✅ Ensures text alignment */
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    height: 70px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensures full width */
+}
+
+/* Fix spacing between checkbox and text */
+.homework-item input[type="checkbox"] {
+    margin-right: 15px; /* Adjust spacing */
+    flex-shrink: 0; /* Prevents shrinking */
+}
+
+/* Text container to make sure the text is centered */
+.homework-item span {
+    flex-grow: 1; /* ✅ Ensures text expands properly */
+    text-align: center; /* ✅ Centers text */
+}
+
+
+/* Completed Homework - Darker */
+.homework-item.completed {
+    background-color: #a0a0a0;
+    color: #ffffff;
+}
+
+/* Checkbox */
+.homework-item input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.homework-item input[type="checkbox"]:checked{
+    background: #505bf0;
+    border-radius: 4px;
+}
+
+
+
+/* =========================
+  Homework Completion Donut Chart
+=========================== */
+.donut-chart-container {
+    position: absolute;
+    right: 9%;
+    top: 28%;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.percentage-label {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+}
+
+
+/* Message when no homework is available */
+.no-homework-message {
+    font-family: "Do Hyeon", serif;
+    font-size: 24px;
+    color: #6c6c6c;
+    text-align: center;
+    padding: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Ensure homework title is centered */
+.homework-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Responsive Grid for Homework + Donut Chart */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* =========================
+  Layout Fix (Homework List + Donut Chart)
+=========================== */
+.main-content {
+    display: flex;
+    justify-content: space-between; /* Ensures items are spaced */
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allows wrapping for small screens */
+    gap: 20px;
+    padding: 20px;
+}
+
+
+
+/* ✅ Mobile Responsive Fix */
+@media (max-width: 900px) {
+    .main-content {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center;
+    }
+
+    #homework-list {
+        width: 100%;
+        max-width: none;
+    }
+
+    .donut-chart-container {
+        margin-left: 0; /* Center donut chart */
+        margin-top: 20px; /* Add spacing */
+    }
+}
+
+
+
+

@@ -1,4 +1,30 @@
 document.addEventListener("DOMContentLoaded", async function () {
+    // ✅ Get teacher email from localStorage
+    let teacherEmail = localStorage.getItem("loggedInTeacherEmail");
+
+    console.log("📩 Teacher Email Retrieved:", teacherEmail); // ✅ Debugging
+
+    if (!teacherEmail) {
+        console.error("❌ Error: No teacher email found in localStorage.");
+        return;
+    }
+
+    try {
+        // ✅ Step 1: Fetch teacher details (including profile photo)
+        const teacherDetailsResponse = await fetch(`http://localhost:8081/api/users/details/${teacherEmail}`);
+        
+        if (teacherDetailsResponse.ok) {
+            const teacherData = await teacherDetailsResponse.json();
+            updateProfilePhotoFromDB(teacherData.profilePhoto); // ✅ Update Profile Photo
+        } else {
+            console.error("❌ Failed to fetch teacher details:", await teacherDetailsResponse.text());
+        }
+    } catch (error) {
+        console.error("❌ Error fetching teacher details:", error);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", async function () {
     // ✅ Get the latest student email from the URL every time
     const urlParams = new URLSearchParams(window.location.search);
     const studentEmail = urlParams.get("studentEmail");
@@ -42,6 +68,31 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("❌ Error fetching student ID or homework:", error);
     }
 });
+
+function updateProfilePhotoFromDB(photoUrl) {
+    const profilePhoto = document.getElementById("profile-photo");
+    if (profilePhoto && photoUrl) {
+        profilePhoto.src = photoUrl; // ✅ Set profile photo dynamically from DB
+    } else {
+        console.error("❌ Profile photo element not found or missing photo URL.");
+    }
+}
+
+// Resize Profile Photo
+function setProfilePhotoSize(width, height) {
+    const profilePhoto = document.getElementById("profile-photo");
+    if (profilePhoto) {
+        profilePhoto.style.width = width + "px";
+        profilePhoto.style.height = height + "px";
+    }
+}
+setProfilePhotoSize(100, 100);
+
+// Profile Photo Click Event (Navigates to My Info Page)
+document.getElementById("profile-photo").addEventListener("click", function () {
+    window.location.href = "../../public/myinfo.html";
+});
+
 
 // ✅ Add Homework Function (Uses studentId, NO teacherEmail needed)
 async function addHomework() {

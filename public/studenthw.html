@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thinking Potato : Homework </title>
+        <link rel="icon" href="/public/img/logo.png" type="image/png">
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Walter+Turncoat&display=swap" rel="stylesheet">
+        <!--CSS-->
+        <link rel="stylesheet" href="/src/styles/studenthw.css">
+        <!-- jQuery -->
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         <!-- js -->
+          <script src="../src/navigation.js"></script>
+          <!--chart-->
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <!--confetti-->
+          <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0"></script>
+
+    </head>
+<body>
+    <!-- New Container for Title & Profile -->
+    <div class="header-container">
+        <h1 id="scheduleTitle">Check My Homework</h1>
+        <div id="profile">
+            <img src="/public/img/profile/blushpotato.png" alt="User Profile" id="profile-photo"/>
+        </div>
+    </div>
+
+    
+    <!-- Homework Completion Donut Chart -->
+    <div class="donut-chart-container">
+        <canvas id="homeworkChart"></canvas>
+        <div class="percentage-label" id="completionPercentage">0%</div>
+    </div>
+
+    <!-- Homework List Container -->
+    <div id="homework-list"></div>
+
+
+    <script src="/src/studenthw.js"></script>    
+</body>
+</html>

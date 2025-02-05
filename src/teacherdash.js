@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (teacherDetailsResponse.ok) {
             const teacherData = await teacherDetailsResponse.json();
             displayUserGreeting(teacherData);
+            updateProfilePhotoFromDB(teacherData.profilePhoto);
         } else {
             console.error("Failed to fetch teacher details:", await teacherDetailsResponse.text());
         }
@@ -28,6 +29,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Error fetching data:", error);
     }
 });
+
+
 
 function displayUserGreeting(user) {
     const greetingElement = document.getElementById("greeting");
@@ -118,6 +121,14 @@ async function deleteStudent(teacherEmail, studentEmail, studentCard) {
     }
 }
 
+function updateProfilePhotoFromDB(photoUrl) {
+    const profilePhoto = document.getElementById("profile-photo");
+    if (profilePhoto && photoUrl) {
+        profilePhoto.src = photoUrl; // ✅ Set profile photo dynamically from DB
+    } else {
+        console.error("❌ Profile photo element not found or missing photo URL.");
+    }
+}
 
 // Resize Profile Photo
 function setProfilePhotoSize(width, height) {

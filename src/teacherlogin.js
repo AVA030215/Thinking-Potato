@@ -1,6 +1,7 @@
 document.getElementById("loginForm").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent the form from submitting
+    event.preventDefault(); // Prevent default form submission
 
+    // Get input values
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -10,25 +11,40 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, password }), // Fix: Proper object structure
         });
 
         if (response.ok) {
             const data = await response.json();
-            if (data.role === "teacher") {
-                localStorage.setItem("loggedInTeacherEmail", email); // Store the teacher's email
-                window.location.href = "teacherdash.html"; // Redirect to the teacher dashboard
+            console.log("🔹 Login Response:", data); // Debugging
+
+            if (data.email) {
+                if (data.role === "teacher") {
+                    localStorage.setItem("loggedInTeacherEmail", data.email);
+                    localStorage.removeItem("loggedInStudentEmail"); // ✅ Ensure student email is cleared
+                    console.log("✅ Teacher email stored:", localStorage.getItem("loggedInTeacherEmail"));
+                    window.location.href = "../../public/teacherdash.html";
+                } else if (data.role === "student") {
+                    localStorage.setItem("loggedInStudentEmail", data.email);
+                    localStorage.removeItem("loggedInTeacherEmail"); // ✅ Ensure teacher email is cleared
+                    
+                    // 🔄 Ensure email is properly saved
+                    setTimeout(() => {
+                        console.log("✅ Student email stored:", localStorage.getItem("loggedInStudentEmail"));
+                        window.location.href = "../../public/studentdash.html"; // Redirect on success  
+                    }, 100);
+                }
             } else {
-                alert("You are not authorized to access this page.");
+                console.error("❌ Login response missing email field:", data);
+                document.getElementById("message").innerText = "Error: Login response missing email.";
             }
         } else {
             const error = await response.text();
-            alert(`Error: ${error}`);
+            document.getElementById("message").innerText = `Error: ${error}`;
         }
     } catch (error) {
-        alert(`Error: ${error.message}`);
+        document.getElementById("message").innerText = `Error: ${error.message}`;
     }
 });
-
 
 
