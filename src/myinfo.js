@@ -173,23 +173,95 @@ function updateProfilePhoto(imageSrc) {
 }
 
 
+async function verifyCurrentPassword() {
+    let email = localStorage.getItem("loggedInTeacherEmail") || localStorage.getItem("loggedInStudentEmail");
+    if (!email) {
+        alert("❌ User not logged in!");
+        return;
+    }
 
-// Change password function (Basic validation)
-function changePassword() {
-    let currentPassword = document.getElementById("current-password").value;
-    let newPassword = document.getElementById("new-password").value;
-    let confirmPassword = document.getElementById("confirm-password").value;
+    const currentPassword = document.getElementById("current-password").value.trim();
+    if (!currentPassword) {
+        document.getElementById("current-password-error").textContent = "❌ Please enter your current password.";
+        return;
+    } else {
+        document.getElementById("current-password-error").textContent = "";
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8081/api/users/verify-password`, { // ✅ FIXED URL
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, currentPassword }),
+        });
+
+        if (response.ok) {
+            // ✅ Current password is correct, enable new password fields
+            document.getElementById("new-password").disabled = false;
+            document.getElementById("confirm-password").disabled = false;
+            document.getElementById("change-password-btn").disabled = false;
+            alert("✅ Current password verified. You can now enter a new password.");
+        } else {
+            document.getElementById("current-password-error").textContent = "❌ Incorrect current password.";
+        }
+    } catch (error) {
+        console.error("❌ Error verifying password:", error);
+    }
+}
+
+// ✅ Change Password Function
+async function changePassword() {
+    let email = localStorage.getItem("loggedInTeacherEmail") || localStorage.getItem("loggedInStudentEmail");
+
+    if (!email) {
+        alert("❌ User not logged in!");
+        return;
+    }
+
+    const newPassword = document.getElementById("new-password").value.trim();
+    const confirmPassword = document.getElementById("confirm-password").value.trim();
+
+    if (!newPassword) {
+        document.getElementById("new-password-error").textContent = "❌ Please enter a new password.";
+        return;
+    } else {
+        document.getElementById("new-password-error").textContent = "";
+    }
 
     if (newPassword !== confirmPassword) {
-        alert("New password and confirm password do not match.");
+        document.getElementById("confirm-password-error").textContent = "❌ Passwords do not match.";
+        return;
+    } else {
+        document.getElementById("confirm-password-error").textContent = "";
+    }
+
+    if (!confirm("Are you sure you want to change your password?")) {
         return;
     }
 
-    if (newPassword.length < 6) {
-        alert("Password should be at least 6 characters long.");
-        return;
-    }
+    try {
+        const response = await fetch(`http://localhost:8081/api/users/update-password`, { // ✅ Correct API URL
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, newPassword }), // ✅ Sending email & new password
+        });
 
-    alert("Password changed successfully!");
+        if (response.ok) {
+            alert("✅ Password changed successfully!");
+            document.getElementById("current-password").value = "";
+            document.getElementById("new-password").value = "";
+            document.getElementById("confirm-password").value = "";
+
+            document.getElementById("new-password").disabled = true;
+            document.getElementById("confirm-password").disabled = true;
+            document.getElementById("change-password-btn").disabled = true;
+        } else {
+            const errorMsg = await response.text();
+            alert(`❌ Failed to change password: ${errorMsg}`);
+        }
+    } catch (error) {
+        console.error("❌ Error changing password:", error);
+    }
 }
+
 

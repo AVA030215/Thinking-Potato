@@ -40,8 +40,8 @@
         
         
         <div class="info-section">
-            <label>Email:</label> 
-            <input type="email" id="email" disabled> 
+            <label>Email:
+            <input type="email" id="email" disabled> </label> 
         
             <label>First Name: 
                 <input type="text" id="first-name" readonly onclick="enableEditing('first-name')">
@@ -54,8 +54,11 @@
             <label>What math level are you in? 
                 <input type="text" id="math-level" readonly onclick="enableEditing('math-level')">
             </label>
-        
-            <button onclick="saveUserInfo()">Save Changes</button> <!-- ✅ Save button -->
+
+            <div class="button-container">
+                <button onclick="saveUserInfo()">Save Changes</button> 
+            </div>
+
         </div>
         
         
@@ -63,22 +66,28 @@
     </div>
     
     <div id="security" class="tab-content">
-        <h2>Change Password</h2>
-    
         <div class="security-section">
-            <label>Current Password: 
-                <input type="password" id="current-password">
-                <button onclick="checkPassword()">Check</button>
-            </label>
-            <p id="error-current" class="error-message" style="display: none;">The password is incorrect. Try again</p>
+            <label>Current Password:
+            <input type="password" id="current-password">
+            <span id="current-password-error" class="error-message"></span> 
+            <button onclick="verifyCurrentPassword()">Verify</button> </label>
+
+            <br></br>
+            <label>New Password:
+            <input type="password" id="new-password" disabled> </label>
+            <span id="new-password-error" class="error-message"></span>
     
-            <label>New Password: 
-                <input type="password" id="new-password" disabled>
-                <button onclick="changePassword()">Change</button>
-            </label>
-            <p id="error-new" class="error-message" style="display: none;">Type the current password first :)</p>
+            <label>Confirm New Password:
+            <input type="password" id="confirm-password" disabled> </label>
+            <span id="confirm-password-error" class="error-message"></span>
+            
+            <div class="button-container">
+                <button onclick="changePassword()" disabled id="change-password-btn">Change Password</button>
+            </div>
+
         </div>
     </div>
+    
     
 </div>
 
